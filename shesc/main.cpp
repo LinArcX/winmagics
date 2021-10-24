@@ -135,7 +135,7 @@ bool ProcessKeyStrokes(void)
 {
 	bool successful = false;
 
-	int virtualKeyCode = GetKeyState(VK_ESCAPE); 
+	int virtualKeyCode = GetKeyState(VK_SHIFT); 
 	if (virtualKeyCode & SHIFTED) 
 	{ 
 		if(GetKeyState(VK_ESCAPE) & 0x0001)

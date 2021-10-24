@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="clcu"
+	Name="shesc"
 	ProjectGUID="{A9246C2B-8F8D-4025-8EED-4125B837479C}"
-	RootNamespace="clcu"
+	RootNamespace="shesc"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
