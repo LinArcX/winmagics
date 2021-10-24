@@ -1,0 +1,12 @@
+.vs/*
+
+winmagics.suo
+winmagics.ncb
+
+Release/BuildLog.htm
+Release/clcu.exe.intermediate.manifest
+Release/clcu.pdb
+Release/main.obj
+Release/mt.dep
+Release/vc80.idb
+Release/vc80.pdb
