@@ -121,7 +121,7 @@ bool CurrentWindowIsCMD(void)
 {
 	bool result = false;
 
-	// TIP: The best way to find windows classes is to use a tool called "Spy++".
+	// To find windows classes use: "Spy++" or "Window Detective"
 	HWND consoleHWND = FindWindow("ConsoleWindowClass", NULL);
 	 if (NULL != consoleHWND)
 	 {

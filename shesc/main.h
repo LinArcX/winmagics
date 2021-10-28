@@ -30,14 +30,14 @@
 #include <tchar.h>
 #pragma warning(pop)
 
-#define APP_NAME "clcu"
+#define APP_NAME "shesc"
 #define SHIFTED 0x8000 
 
 HWND gWindowHandle;
 BOOL gGameIsRunning;
 
-bool CurrentWindowIsCMD(void);
 bool ProcessKeyStrokes(void);
+bool CurrentWindowIsCMD(void);
 void SimulateKeyStrokes(void);
 BOOL IsAppAlreadyRunning(void);
 DWORD CreateMainGameWindow(void);
