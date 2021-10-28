@@ -3,10 +3,12 @@
 winmagics.suo
 winmagics.ncb
 
-Release/BuildLog.htm
-Release/shesc.exe.intermediate.manifest
-Release/shesc.pdb
-Release/main.obj
+Debug/*
+
 Release/mt.dep
+Release/main.obj
 Release/vc80.idb
 Release/vc80.pdb
+Release/shesc.pdb
+Release/BuildLog.htm
+Release/shesc.exe.intermediate.manifest

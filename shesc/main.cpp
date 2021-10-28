@@ -1,11 +1,6 @@
 #include "main.h"
 
-#define SHIFTED 0x8000 
-
-INT __stdcall WinMain(HINSTANCE Instance,
-					  HINSTANCE PreviousInstance,
-					  PSTR CmdLine,
-					  INT CmdShow) 
+INT __stdcall WinMain(HINSTANCE Instance, HINSTANCE PreviousInstance, PSTR CmdLine, INT CmdShow) 
 {
 	UNREFERENCED_PARAMETER(Instance);
 	UNREFERENCED_PARAMETER(PreviousInstance);
@@ -36,24 +31,22 @@ INT __stdcall WinMain(HINSTANCE Instance,
 		}
 
 		// Main Loop
-		if(ProcessKeyStrokes())
+		if(CurrentWindowIsCMD())
 		{
-			SimulateKeyStrokes();
+			if(ProcessKeyStrokes())
+			{
+				SimulateKeyStrokes();
+			}
 		}
 		Sleep(100);
 	}
-
 Exit:
 	return (Result);
 }
 
-LRESULT CALLBACK MainWindowProc(HWND WindowHandle,
-								UINT Message,
-								WPARAM WParam,
-								LPARAM LParam)
+LRESULT CALLBACK MainWindowProc(HWND WindowHandle, UINT Message, WPARAM WParam, LPARAM LParam)
 {
 	LRESULT Result = 0;
-
 	switch (Message)
 	{
 		case WM_CLOSE:
@@ -69,12 +62,10 @@ LRESULT CALLBACK MainWindowProc(HWND WindowHandle,
 	return Result;
 }
 
-
 DWORD CreateMainGameWindow(void)
 {
 	DWORD Result = ERROR_SUCCESS;
 	WNDCLASSEX WindowClass = {0};
-
 	WindowClass.cbSize = sizeof(WNDCLASSEX);
 	WindowClass.style = 0;
 	WindowClass.cbClsExtra = 0;
@@ -87,8 +78,7 @@ DWORD CreateMainGameWindow(void)
 	if (!RegisterClassEx(&WindowClass))
 	{
 		Result = GetLastError();
-		MessageBox(NULL, "Window Registration Failed!", "Error!",
-			MB_ICONEXCLAMATION | MB_OK);
+		MessageBox(NULL, "Window Registration Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
 		goto Exit;
 	}
 
@@ -98,8 +88,7 @@ DWORD CreateMainGameWindow(void)
 	if (gWindowHandle == NULL)
 	{
 		Result = GetLastError();
-		MessageBox(NULL, "Window Creation Failed!", "Error!",
-			MB_ICONEXCLAMATION | MB_OK);
+		MessageBox(NULL, "Window Creation Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
 		goto Exit;
 	}
 
@@ -107,11 +96,9 @@ DWORD CreateMainGameWindow(void)
 		(WS_OVERLAPPEDWINDOW | SW_HIDE) & ~WS_OVERLAPPEDWINDOW))
 	{
 		Result = GetLastError();
-		MessageBox(NULL, "Can't SetWindowLongPtr!", "Error!",
-				MB_ICONEXCLAMATION | MB_OK);
+		MessageBox(NULL, "Can't SetWindowLongPtr!", "Error!", MB_ICONEXCLAMATION | MB_OK);
 		goto Exit;
 	}
-
 Exit:
 	return (Result);
 }
@@ -120,7 +107,6 @@ BOOL IsAppAlreadyRunning(void)
 {
 	HANDLE Mutex = NULL;
 	Mutex = CreateMutex(NULL, FALSE, APP_NAME "_Mutex");
-
 	if (GetLastError() == ERROR_ALREADY_EXISTS)
 	{
 		return (TRUE);
@@ -129,6 +115,27 @@ BOOL IsAppAlreadyRunning(void)
 	{
 		return (FALSE);
 	}
+}
+
+bool CurrentWindowIsCMD(void)
+{
+	bool result = false;
+
+	// TIP: The best way to find windows classes is to use a tool called "Spy++".
+	HWND consoleHWND = FindWindow("ConsoleWindowClass", NULL);
+	 if (NULL != consoleHWND)
+	 {
+		 if(GetForegroundWindow() == consoleHWND)
+		 {
+			result = true;
+		 }
+		 else
+		 {
+			result = false;
+		 }
+	 }
+	
+	return result;
 }
 
 bool ProcessKeyStrokes(void)
@@ -143,7 +150,6 @@ bool ProcessKeyStrokes(void)
 			successful = true;
 		}
 	}
-
 	return successful;
 }
 

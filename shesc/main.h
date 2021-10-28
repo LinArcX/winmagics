@@ -31,10 +31,12 @@
 #pragma warning(pop)
 
 #define APP_NAME "clcu"
+#define SHIFTED 0x8000 
 
 HWND gWindowHandle;
 BOOL gGameIsRunning;
 
+bool CurrentWindowIsCMD(void);
 bool ProcessKeyStrokes(void);
 void SimulateKeyStrokes(void);
 BOOL IsAppAlreadyRunning(void);
